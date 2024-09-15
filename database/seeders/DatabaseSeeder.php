@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Conversation;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +14,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
+        User::create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 'user1@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        User::create([
+            'name' => 'Test User',
+            'email' => 'user2@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        Conversation::create([
+            'user1_id' => '1',
+            'user2_id' => '2'
         ]);
     }
 }
