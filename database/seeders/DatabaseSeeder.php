@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Conversation;
+use App\Models\Chat;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,21 +14,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        $user1 = User::create([
             'name' => 'Test User',
             'email' => 'user1@example.com',
             'password' => bcrypt('password'),
         ]);
 
-        User::create([
+        $user2 = User::create([
             'name' => 'Test User',
             'email' => 'user2@example.com',
             'password' => bcrypt('password'),
         ]);
 
-        Conversation::create([
-            'user1_id' => '1',
-            'user2_id' => '2'
+        $chat = Chat::create([
+            'uuid' => (string) Str::uuid(),
+            'name' => 'chat',
+            'type' => 'private'
         ]);
+
+        $chat->participants()->attach([$user1->id, $user2->id]);
     }
 }
