@@ -11,8 +11,13 @@ class Message extends Model
 
     protected $guarded = ['id'];
 
-    public function conversation(): mixed
+    public function chat()
     {
-        return $this->belongsTo(Conversation::class);
+        return $this->belongsTo(Chat::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
